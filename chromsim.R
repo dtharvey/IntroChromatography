@@ -95,6 +95,21 @@ isocratic = function(K = c(0, 1, 3, 5), conc = c(1, 100, 100, 100),
   invisible(output)
 }
 
+# function: gradient
+# calculates analyte's retention time for a linear or a step gradient;
+# linear gradient allows for an initial hold time, a final hold time, 
+# and a linear ramp between the two; the step gradient has an initial 
+# hold time, a step that is held until a final hold time, and a final step
+# k.low: analyte's retention factor for initial mobile phase composition
+# k.mid: analyte's retention factor for middle of step gradient
+# k.high: analyte's retention factor for final mobile phase composition
+# grad.start: time when gradient begins
+# grad.end: time when gradient ends
+# max_cycles: limit on iterations; no need to change
+# t.m: time to elute non-retained solutes
+# linear: logical; TRUE is linear; FALSE is step
+# k: vector for storing analyte's retention factors
+
 gradient = function(k.low = 1.4105, k.mid = 0.6402, k.high = 0.2906,
                     grad.start = 100, grad.end = 270, 
                     max.cycles = 10000, t.m = 20, linear = TRUE) {
@@ -123,3 +138,27 @@ gradient = function(k.low = 1.4105, k.mid = 0.6402, k.high = 0.2906,
   output1 = "failed"
 }
 
+animate_detector = function(filename, speed = 10) {
+  for (i in seq(1, filename[["cycles"]], by = speed)) {
+    plot(x = seq(1:i), 
+         y = filename[["detector"]][1:i],
+         xlim = c(1, filename[["cycles"]]),
+         ylim = c(0, max(filename[["detector"]])),
+         type = "l", lwd = 2, col = "blue", 
+         xlab = "time", ylab = "signal (a.u.)", 
+         main = "detector view")
+    Sys.sleep(0.1)
+  }
+}
+
+animate_column = function(filename, speed = 10) {
+  for (i in seq(1, filename[["cycles"]], by = speed)) {
+    plot(x = seq(1:filename[["plates"]]),
+         y = filename[["column.all"]][ , i],
+         type = "l", lwd = 3, col = "blue",
+         ylim = c(0, 0.05 * max(filename[["column.all"]])),
+         xlab = "distance", ylab = "concentration",
+         main = "column view")
+    Sys.sleep(0.1)
+  }
+}

@@ -8,6 +8,8 @@ out_1 = isocratic(K = c(0, 1, 3, 9), conc = c(1, 100, 100, 100),
                   length = 100)
 out_2 = isocratic(K = c(0, 1, 3, 9), conc = c(0.5, 100, 100, 100), 
                   length = 200)
+out_3 = isocratic(K = c(0, 1, 3, 5), conc = c(1, 100, 100, 100), 
+                  length = 100)
 
 # data sets for investigation seven
 hetp.exp = c(9.59, 5.29, 3.63, 3.42, 3.46, 3.06, 3.25, 3.31, 3.50, 

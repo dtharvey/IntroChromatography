@@ -35,12 +35,12 @@ shinyServer(function(input, output) {
       paste0("retention time: ", time, " seconds", "\n", 
              "peak height: ", height, " a.u.", "\n", 
              "peak width: ", width, " seconds", "\n", 
-             "peak area: ", area, " a.u. * seconds")
+             "peak area: ", area, " a.u. • seconds")
     } else {
       paste0("retention time: NA seconds", "\n", 
              "peak height: NA a.u.", "\n", 
              "peak width: NA seconds", "\n", 
-             "peak area: NA a.u. * seconds")
+             "peak area: NA a.u. • seconds")
     }
   })
   
@@ -708,6 +708,27 @@ shinyServer(function(input, output) {
     }
     axis(4, ylim =c(70, 100))
     mtext("gradient", side = 4, line = 4)
+    par(old.par)
+  })
+  
+  # code for review
+  
+  output$plot_review = renderPlot({
+    old.par = par(mfrow = c(2,1))
+    plot(x = seq(1:input$slider_review + 1), 
+        y = c(out_3[["detector"]][1:input$slider_review + 1]),
+        xlim = c(1, out_3[["cycles"]]),
+        ylim = c(0, max(out_3[["detector"]])),
+        type = "l", lwd = 2, col = "blue", 
+        xlab = "time", ylab = "signal (a.u.)", 
+        main = "detector view")
+    plot(x = seq(0, out_3[["plates"]] - 1),
+         y = out_3[["column.all"]][ , input$slider_review + 1],
+         lwd = 2, type = "l", col = "blue",
+         ylim = c(0, 20),
+         xlab = "distance", ylab = "concentration", 
+         main = "column view"
+    )
     par(old.par)
   })
   

@@ -2,6 +2,16 @@ library(shiny)
 
 shinyUI(fluidPage(
   withMathJax(),
+  tags$style(HTML("
+                  ol {
+                  font-size: 18px;
+                  font-weight: normal;
+                  }
+
+                  h4 {
+                  font-weight: normal;
+                  }
+                  ")),
   tabsetPanel(
     
     tabPanel("Home",
@@ -11,44 +21,35 @@ shinyUI(fluidPage(
                  offset = 1,
                  h1("Introduction to Chromatography", align = "center"),
                  br(),
-                 HTML("<p>NEED SOME TEXT HERE. In this learning module we take a
-                      closer look at chromatography using the following series 
-                      of investigations:</p>"),
-                 HTML("<ul> 
-                      <li> 
-                      <p>Investigation 1: A First Look at a 
-                        Chromatogram</p>
-                    </li> 
-                    <li> 
-                    <p>Investigation 2: A Closer Look at the Separation</p>
-                    </li>
-                    <li> 
-                    <p>Investigation 3: The Partition Coefficient and 
-                      the Retention Factor</p>
-                    </li>
-                    <li> 
-                    <p>Investigation 4: Theoretical Plates</p>
-                      </li>
-                      <li> 
-                      <p>Investigation 5: A First Look at Chromatographic 
-                        Resolution</p>
-                    <li>
-                    <p>Investigation 6: A Closer Look at Chromatographic 
-                        Resolution</p>
-                      </li>
-                      <li>
-                      <p>Investigation 7: Improving Resolution Through 
-                        Column Efficiency</p>
-                    </li>
-                      <li>
-                      <p>Investigation 8: Improving Resolution Through 
-                        Column Selectivity</p>
-                    </li>
-                      <li>
-                      <p>Investigation 9: Improving Resolution Through 
-                        Column Retention</p>
-                    </li>
-                    </ul>")
+                 h4("This learning module provides an introduction to 
+                    chromatography with an emphasis on understanding 
+                    basic chromatographic terms and measurements, and 
+                    understanding the factors that affect the quality 
+                    of a separation. The treatment is independent of 
+                    the form of chromatography and, although data from 
+                    GC and HPLC experiments are used to illustrate topics 
+                    presented in some investigations, no emphasis is 
+                    placed on particular chromatographic techniques. The 
+                    module consists of the following nine investigations:"),
+                 tags$ol(
+                    tags$li("Investigation 1: A First Look at a 
+                            Chromatogram"), 
+                    tags$li("Investigation 2: A Closer Look at the 
+                            Separation"),
+                    tags$li("Investigation 3: Partition Coefficients and
+                      Retention Factors"),
+                    tags$li("Investigation 4: Theoretical Plates"),
+                    tags$li("Investigation 5: A First Look at 
+                      Chromatographic Resolution"),
+                    tags$li("Investigation 6: A Closer Look at 
+                      Chromatographic Resolution"),
+                    tags$li("Investigation 7: Improving Resolution 
+                      Through Efficiency"),
+                    tags$li("Investigation 8: Improving Resolution 
+                      Through Selectivity"),
+                    tags$li("Investigation 9: Improving Resolution 
+                      Through Retention")
+                    )
              )
           )
       ), # close Home tabPanel
@@ -418,7 +419,8 @@ shinyUI(fluidPage(
                p(
                  "In Investigation 5 we learned that the resolution 
                  between two chromatographic peaks is equivalent to 
-                 $$R = \\frac{2 \\left( {t}_{r,b} - 
+                 $$R = \\frac{2 \\times \\Delta {t}_{r}} {{w}_{a} + {w}_{b}} =
+                 \\frac{2 \\left( {t}_{r,b} - 
                  {t}_{r,a} \\right)} {{w}_{a} + {w}_{b}}$$
                  where \\(a\\) is the earlier eluting peak and \\(b\\) 
                  is the later eluting peak. Another expression for 
@@ -434,7 +436,7 @@ shinyUI(fluidPage(
                h5("Questions"),
                p(
                 "1. The three terms in the resolution equation are, in 
-                particular order, asssociated with the column's 
+                no particular order, associated with the column's 
                 general retention of analytes, the efficiency with 
                 which the analyte moves within the mobile phase and 
                 between the mobile phase and the stationary phase, and 
@@ -501,19 +503,14 @@ shinyUI(fluidPage(
     tabPanel("Investigation 7",
              column(
                width = 6,
-               h4("Improving Resolution Through Column Efficiency"),
+               h4("Improving Resolution Through Efficiency"),
                p(
-                "Our equation for resolution from the previous 
-                investigation suggests that we can use three broad 
-                strategies to optimize resolution: 
-                improve efficiency by limiting the broadening of an 
-                analyte's band as it passes through the column, improve 
-                selectivity by increasing the relative difference in 
-                the retention factors of the analytes, and improve retention 
-                by keeping the analytes on the column for a sufficient 
-                length of time. In this investigation, we consider ways
-                to improve efficiency by increasing the number of 
-                theoretical plates."
+                "Our equation for resolution suggests that there are 
+                three broad strategies for optimizing resolution: 
+                improve efficiency, improve relative selectivity, and 
+                improve general retention. In this investigation, we 
+                consider ways to improve efficiency by increasing the 
+                number of theoretical plates."
                ),
                h5("Questions"),
                p(
@@ -528,16 +525,16 @@ shinyUI(fluidPage(
                 As suggested by the data in the
                 figure on the right, the height of a theoretical plate 
                 is an interesting function of the mobile phase's flow 
-                rate, u, that we can model using the van Deemter equation
-                $$H = A + \\frac{B}{u} + Cu$$
-                where A, B, and C are constants that describe, in no 
-                particular order, the contribution to 
-                peak width of aan analyte taking paths of different 
-                length as it moves through the column, of the analyte's 
+                rate, u. We can model this data using the van Deemter 
+                equation $$H = A + \\frac{B}{u} + Cu$$ where A, B, and 
+                C are constants that describe, in no particular order, 
+                the contribution to peak width of an analyte traveling 
+                different distances as it moves through the column using 
+                multiple pathways, of the analyte's longitudinal
                 diffusion in the mobile phase as it moves through the 
-                column, and the kinetics 
-                of the analytes diffusion between the mobile phase and  
-                the stationary phase. Match A, B, and C to the 
+                column, and the kinetics that describe the analyte's 
+                equilibrium (or mass transfer) between the mobile phase 
+                and the stationary phase. Match A, B, and C to the 
                 appropriate source and explain how you arrived at these 
                 assignments."
                ),
@@ -592,7 +589,7 @@ shinyUI(fluidPage(
     tabPanel("Investigation 8",
              column(
                width = 6,
-               h4("Improving Resolution Through Column Selectivity"),
+               h4("Improving Resolution Through Selectivity"),
                p(
                 "A second way to improve resolution is to focus on 
                 \\(\\alpha\\) and increase the relative difference 
@@ -667,7 +664,7 @@ shinyUI(fluidPage(
     tabPanel("Investigation 9",
              column(
                width = 6,
-               h4("Improving Resolution Through Column Retention"),
+               h4("Improving Resolution Through Retention"),
                p(
                 "Because a separation requires time, a third way to 
                 improve the resolution between two analytes is to 
@@ -746,9 +743,56 @@ shinyUI(fluidPage(
     
     tabPanel("Review",
           column
-          (width = 12,
-          h4("Wrapping Up")
-           
+          (width = 6,
+          HTML("<h4><strong>Summary</strong></h4"),
+          p(
+            "Having completed this learning module, you should understand 
+            the meaning of the basic descriptive characteristics of an 
+            analyte's chromatographic peak--retention time, peak height, 
+            peak width, and peak area--and understand how to measure them 
+            and to use them to calculate other characteristic values, 
+            such as an analyte's retention factor or a column's number 
+            of theoretical plates. In addition, you should appreciate 
+            the various factors that affect the resolution between two 
+            analytes, and understand the various strategies for improving 
+            resolution."
+          ),
+          HTML("<h4><strong>Additional Resources,</strong></h4>"),
+          HTML("<p>You will find a more detailed discussion of the topics 
+                covered in this learning module in Chapter 12 of 
+                <em>Analytical Chemistry 2.0</em>, which is available 
+                using this <a href = http://bit.ly/1r3wJoz>link</a>.</p>"),
+          HTML("<p>Many useful resources for learning about chromatography 
+               are available through CHROMAcademy, which you can reach 
+               using this <a href = http://www.chromacademy.com/>link</a>.
+               </p>"),
+          HTML("Use this <a href = http:http://www.hplcsimulator.org/>
+               link</a> to access a free HPLC simulator. To read more 
+               about the simulator, see Boswell, P. G.; Stoll, D. R.; 
+              Carr, P. W.; Nagel, M. L.; Vitha, M. F; Mabbott, G. A. 
+              <emphasis>J. Chem. Educ.</emphasis> <strong>2013</strong>, 
+               <emphasis>90</emphasis>, 198-202."),
+          HTML("The R functions used to simulate the isocratic elutions 
+               in Investigations 1-4 and to calculate retention times
+               for gradient elutions are available 
+               <a href = https://github.com/dtharvey/IntroChromatography>
+               here</a> in the file chromsim.R. Also included in this 
+               file are functions for animating the detector view and 
+               the column view. Although the figure to the right does 
+               not use these functions, it illustrates the output of 
+               these functions; click on Run to view the animation.")
+          ),
+          column(
+            width = 6,
+            align = "center",
+            plotOutput("plot_review", height = "600px"),
+            sliderInput("slider_review", "time", min = 0, 
+                        max = 800, step = 5, 
+                        value = 0, ticks = FALSE, width = "80%",
+                        animate = animationOptions(interval = 200,
+                                                   playButton = "Run",
+                                                   pauseButton = "Stop")
+                        )
           )
       
     ) # end wrap-up
