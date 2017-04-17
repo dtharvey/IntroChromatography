@@ -174,8 +174,9 @@ shinyUI(fluidPage(
                            max = out_1$cycles, step = 1, ticks = FALSE,
                            value = 0, width = "80%"),
                radioButtons("radio_2a", "display...",
-                            c("all analytes", "analyte A", "analyte B",
-                              "analyte C"), selected = "all analytes",
+                            choices = c("all analytes", "analyte A", 
+                                        "analyte B", "analyte C"), 
+                            selected = "all analytes",
                             inline = TRUE),
                radioButtons("radio_2b", "show mobile phase and
                             stationary phase?", choices = c("no", "yes"),
@@ -405,7 +406,7 @@ shinyUI(fluidPage(
                            value = c(1.0, 1.2), ticks = FALSE, 
                            width = "80%"),
                radioButtons("radio_5a", "relative concentrations: A:B", 
-                            choice = c("1:1", "1:2", "1:4", "2:1", "4:1"), 
+                            choices = c("1:1", "1:2", "1:4", "2:1", "4:1"), 
                             selected = "1:1", inline = TRUE),
                verbatimTextOutput("text_5a")
              )
