@@ -1,10 +1,12 @@
 name: IntroChromatography
+title: IntroChromatography
+username:
 account: dthdpu
 server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
 appId: 96201
-bundleId: 437022
+bundleId: 1491235
 url: https://dthdpu.shinyapps.io/IntroChromatography/
-when: 1461863390.38046
+when: 1532090217.63503
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: alkbenzene.R|cce.ai|IntroChrom_InstructorsGuide.pdf|IntroChrom_InstructorsGuide.Rmd|isoData.RData
